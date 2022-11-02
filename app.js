@@ -1,4 +1,4 @@
-//jshint esversion:6
+
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -18,7 +18,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://guhan:guhan007@cluster0.svllg.mongodb.net/blogDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://guhan:guhan@cluster0.svllg.mongodb.net/blogDB", {useNewUrlParser: true});
+
 
 
 
@@ -50,17 +51,13 @@ app.get("/contact", function(req,res){
 
 app.get("/compose", function(req,res){
   res.render("compose");
-  
 })
 
 app.get("/posts/:postId", function(req,res){
   const requestedPostId = req.params.postId;
   Post.findOne({_id: requestedPostId}, function(err, post){
       res.render("post", {contentTitle: post.title, contentBody: post.content});
-    
   });
-  
-  
 });
 
 app.post("/compose", function(req,res){
@@ -69,17 +66,23 @@ app.post("/compose", function(req,res){
     content: req.body.postBody
   });
   post.save(function(err){
-
     if (!err){
- 
       res.redirect("/");
- 
     }
- 
   });
-  
- 
 })
+
+
+app.post('/posts/:postId', (req, res) => {
+  const reqId = req.params.postId;
+  Post.findOneAndRemove(reqId, function(err){
+    if(!err){
+      console.log("Successfully deleted!")
+      res.redirect("/");
+    }
+  })
+});
+
 
 app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port 3000");

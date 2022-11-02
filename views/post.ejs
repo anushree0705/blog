@@ -2,4 +2,10 @@
 
 <h1> <%= contentTitle%> </h1>
 <p> <%= contentBody %> </p>
+
+<form action="/posts/${postId}" method="post">
+    <button type='submit' id='myButton' name="button" class="button">Delete</button>
+</form>
+
+
 <%- include('partials/footer.ejs') -%>
