@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -87,6 +85,6 @@ app.post('/posts/:postId', (req, res) => {
 });
 
 
-app.listen(process.env.PORT || 3000, function() {
-  console.log("Server started on port 3000");
+app.listen(5000, function() {
+  console.log("Server started on port 5000");
 });

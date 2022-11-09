@@ -1,11 +1,16 @@
 <%- include('partials/header.ejs') -%>
 
-<h1> <%= contentTitle%> </h1>
+<h1> <%= contentTitle %> </h1>
 <p> <%= contentBody %> </p>
 
 <form action="/posts/${postId}" method="post">
     <button type='submit' id='myButton' name="button" class="button">Delete</button>
 </form>
 
+<style>
+    body { 
+     background-color: #D8D8D8;
+   }
+</style>
 
 <%- include('partials/footer.ejs') -%>
